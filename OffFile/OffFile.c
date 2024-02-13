@@ -11,25 +11,26 @@ OffFile* read_off_file(const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) return NULL;
 
-    ObjectDetails* object_details = (ObjectDetails*)malloc(sizeof(ObjectDetails));
-    int result = get_object_details(file, object_details);
-    if (result != 0) {
-        free(object_details);
+    OffFile* off_file = (OffFile*)malloc(sizeof(OffFile));
+    if (off_file == NULL) {
         fclose(file);
         return NULL;
     }
 
-    ArrayList* vertices = get_vertices(file, object_details->vertices);
+    int result = get_object_details(file, &off_file->details);
+    if (result != 0) {
+        fclose(file);
+        return NULL;
+    }
+
+    ArrayList* vertices = get_vertices(file, off_file->details.vertices);
     if (vertices == NULL) {
-        free(object_details);
         fclose(file);
         return NULL;
     }
 
     // ArrayList* faces = get_faces(file, object_details->faces);
 
-    OffFile* off_file = (OffFile*)malloc(sizeof(OffFile));
-    off_file->details = object_details;
     off_file->vertices = vertices;
     // off_file->faces = faces;
     fclose(file);
@@ -87,9 +88,31 @@ ArrayList* get_vertices(FILE* file, int vertices_cnt) {
     return vertices;
 }
 
-ArrayList* get_faces(FILE* file, int faces_cnt) {
-    // TODO: Implement this function
-    return NULL;
+ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
+    char* line = NULL;
+    size_t len = 0;
+
+    ArrayList* faces = array_list_new();
+    int v1_index, v2_index, v3_index;
+    for (int i=0; i<faces_cnt; i++) {
+        Face* face = (Face*) malloc(sizeof(Face));
+        if (getline(&line, &len, file) == -1) {
+            array_list_free(faces, free_face);
+            free(line);
+            return NULL;
+        }
+        if (sscanf(line, "%d %d %d", &v1_index, &v2_index, &v3_index) != 3) {
+            array_list_free(faces, free_face);
+            free(line);
+            return NULL;
+        }
+        face->v1 = *((Vertex*)array_list_get(vertices, v1_index));
+        face->v2 = *((Vertex*)array_list_get(vertices, v2_index));
+        face->v3 = *((Vertex*)array_list_get(vertices, v3_index));
+        array_list_append(faces, (void*)face);
+    }
+    free(line);
+    return vertices;
 }
 
 /**
@@ -113,7 +136,7 @@ void* free_face(void* face) {
 void free_off_file(OffFile* off_file) {
     array_list_free(off_file->vertices, free_vertex);
     // array_list_free(off_file->faces, free_face);
-    free(off_file->details);
+    // free(off_file->details);
     free(off_file);
 }
 
