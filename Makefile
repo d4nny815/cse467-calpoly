@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -Wall -std=c99 -pedantic -g
+CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g -O
 MAIN = main
 BUILD_DIR = build
-OBJS = ArrayList OffFile
+OBJS = ArrayList OffFile Primitives Transformation
 
 PROGS = $(MAIN) 
 all : dirs $(PROGS)
@@ -13,7 +13,13 @@ $(MAIN) : $(MAIN).c $(OBJS:%=$(BUILD_DIR)/%.o)
 $(BUILD_DIR)/ArrayList.o : ArrayList/ArrayList.c ArrayList/ArrayList.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+$(BUILD_DIR)/Primitives.o : Primitives/Primitives.c Primitives/Primitives.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
 $(BUILD_DIR)/OffFile.o : OffFile/OffFile.c OffFile/OffFile.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)/Transformation.o : Transformation/Transformation.c Transformation/Transformation.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 dirs: 

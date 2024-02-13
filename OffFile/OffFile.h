@@ -9,18 +9,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include "../ArrayList/ArrayList.h"
-
-typedef struct Vertex {
-    float x; // might be float
-    float y;
-    float z;
-} Vertex;
-
-typedef struct Face {
-    Vertex v1;
-    Vertex v2;
-    Vertex v3;
-} Face;
+#include "../Primitives/Primitives.h"
 
 typedef struct ObjectDetails {
     int32_t vertices;
