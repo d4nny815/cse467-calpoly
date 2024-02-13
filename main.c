@@ -9,10 +9,17 @@ int main(void) {
 	printf("Edges: %d\n", off_file->details.edges);
 
 	for (int i=0; i<off_file->vertices->index; i++) {
-		Vertex v = *((Vertex*)array_list_get(off_file->vertices, i));
-		printf("V%d: (%f, %f, %f) ", i, v.x, v.y, v.z);
+		printf("v%d: ", i);
+		print_vertex((Vertex*)array_list_get(off_file->vertices, i));
 	}
 	printf("\n");
+
+	for (int i=0; i<off_file->faces->index; i++) {
+		printf("Face%d: ", i);
+		print_face((Face*)array_list_get(off_file->faces, i));
+	}
+	printf("\n");
+
 
 	free_off_file(off_file);
 	return 0;

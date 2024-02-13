@@ -29,10 +29,15 @@ OffFile* read_off_file(const char* filename) {
         return NULL;
     }
 
-    // ArrayList* faces = get_faces(file, object_details->faces);
+    ArrayList* faces = get_faces(file, off_file->details.faces, vertices);
+    if (vertices == NULL) {
+        fclose(file);
+        return NULL;
+    }
+
 
     off_file->vertices = vertices;
-    // off_file->faces = faces;
+    off_file->faces = faces;
     fclose(file);
     return off_file;
 }
@@ -88,12 +93,21 @@ ArrayList* get_vertices(FILE* file, int vertices_cnt) {
     return vertices;
 }
 
+
+/**
+ * @brief Reads the faces from the off file and stores them in an ArrayList.
+ * @param file The file to read from. Assume the file pointer is at the correct position.
+ * @param faces_cnt The number of faces to read.
+ * @param vertices The ArrayList containing the vertices.
+ * @return A pointer to the new ArrayList containing the faces.
+*/
 ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
     char* line = NULL;
     size_t len = 0;
+    const int ARGS = 4;
 
     ArrayList* faces = array_list_new();
-    int v1_index, v2_index, v3_index;
+    int num_faces, v1_index, v2_index, v3_index;
     for (int i=0; i<faces_cnt; i++) {
         Face* face = (Face*) malloc(sizeof(Face));
         if (getline(&line, &len, file) == -1) {
@@ -101,7 +115,7 @@ ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
             free(line);
             return NULL;
         }
-        if (sscanf(line, "%d %d %d", &v1_index, &v2_index, &v3_index) != 3) {
+        if (sscanf(line, "%d %d %d %d", &num_faces, &v1_index, &v2_index, &v3_index) != ARGS) {
             array_list_free(faces, free_face);
             free(line);
             return NULL;
@@ -112,8 +126,25 @@ ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
         array_list_append(faces, (void*)face);
     }
     free(line);
-    return vertices;
+    return faces;
 }
+
+
+void print_vertex(Vertex* v) {
+    printf("(%f, %f, %f)", v->x, v->y, v->z);
+}
+
+
+void print_face(Face* f) {
+    printf("{v1:");
+    print_vertex(&(f->v1));
+    printf(" v2:");
+    print_vertex(&(f->v2));
+    printf(" v3: ");
+    print_vertex(&(f->v3));
+    printf("}\n");
+}
+
 
 /**
  * @brief function pointer to free a vertex
@@ -135,8 +166,7 @@ void* free_face(void* face) {
 
 void free_off_file(OffFile* off_file) {
     array_list_free(off_file->vertices, free_vertex);
-    // array_list_free(off_file->faces, free_face);
-    // free(off_file->details);
+    array_list_free(off_file->faces, free_face);
     free(off_file);
 }
 
