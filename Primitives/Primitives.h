@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#define DEFAULT_COLOR (ColorValue) {255, 255, 255}
+#define DEFAULT_COLOR (ColorValue) {255}
 
 typedef struct Vertex {
     float x;
@@ -18,10 +18,14 @@ typedef struct Vector {
     float k;
 } Vector;
 
+// typedef struct ColorValue {
+//     uint8_t r;
+//     uint8_t g;
+//     uint8_t b;
+// } ColorValue;
+
 typedef struct ColorValue {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
+    uint8_t greyscale;
 } ColorValue;
 
 typedef struct Face {
@@ -38,7 +42,7 @@ Vector vec_cross_product(Vector A, Vector B);
 float vec_dot_product(Vector A, Vector B);
 Vector vec_scalar(Vector A, float scalar);
 float q_rsqrt(float number);
-// float vec_magnitude(Vector A);
+float vec_magnitude(Vector A);
 
 void print_vertex(Vertex v);
 void print_face(Face f);

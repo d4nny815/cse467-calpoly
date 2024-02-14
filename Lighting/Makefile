@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -std=c99 -pedantic -g -O
 LDFLAGS = -lm
-MAIN = Primitives_test
+MAIN = Lighting_tests
 
-OBJS = Primitives
+OBJS = Lighting Primitives
 PROGS = $(MAIN)
 
 all : $(PROGS)
@@ -11,8 +11,12 @@ all : $(PROGS)
 $(MAIN) : $(MAIN).c $(OBJS:%=%.o)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-%.o : %.c %.h
+Lighting.o : Lighting.c Lighting.h
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+Primitives.o : 
+	cp ../Primitives/Primitives.o .
+
 
 clean :
 	rm -f $(PROGS) *.o

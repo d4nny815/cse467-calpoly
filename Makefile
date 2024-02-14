@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g -O
+CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g
+LDFLAGS = -lm
 MAIN = main
 BUILD_DIR = build
 OBJS = ArrayList OffFile Primitives Transformation Lighting
@@ -8,7 +9,7 @@ PROGS = $(MAIN)
 all : dirs $(PROGS)
 
 $(MAIN) : $(MAIN).c $(OBJS:%=$(BUILD_DIR)/%.o)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(BUILD_DIR)/ArrayList.o : ArrayList/ArrayList.c ArrayList/ArrayList.h
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -30,4 +31,4 @@ dirs:
 
 clean :
 	rm -rf $(BUILD_DIR)
-	rm $(MAIN)
+	rm -f $(MAIN)

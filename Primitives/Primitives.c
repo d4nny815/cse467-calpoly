@@ -35,6 +35,7 @@ Vector calculate_unit_normal_vec(Vertex v1, Vertex v2, Vertex v3) {
  * @param A The first vector.
  * @param B The second vector.
  * @return The cross product of the two vectors.
+ * @note https://www.symbolab.com/solver/vector-cross-product-calculator 
 */
 Vector vec_cross_product(Vector A, Vector B) {
     Vector C;
@@ -50,6 +51,7 @@ Vector vec_cross_product(Vector A, Vector B) {
  * @param A The first vector.
  * @param B The second vector.
  * @return The dot product of the two vectors.
+ * @note https://www.calculatorsoup.com/calculators/algebra/dot-product-calculator.php 
 */
 float vec_dot_product(Vector A, Vector B) {
     return A.i * B.i + A.j * B.j + A.k * B.k;
@@ -67,23 +69,22 @@ Vector vec_scalar(Vector A, float scalar) {
 }
 
 
-//TODO: doesnt work
 /**
  * @brief Calculates the magnitude of a vector.
  * @param A The vector to calculate the magnitude of.
  * @return The magnitude of the vector.
 */
-// float vec_magnitude(Vector A) {
-    // float mag = sqrt(A.i * A.i + A.j * A.j + A.k * A.k);
-    // return sqrtf(A.i * A.i + A.j * A.j + A.k * A.k);
-// }
+float vec_magnitude(Vector A) {
+    float mag = sqrt(A.i * A.i + A.j * A.j + A.k * A.k);
+    return mag;
+}
 
 
 /**
  * @brief Calculates the inverse square root of a number.
  * @param number The number to calculate the inverse square root of.
  * @return The inverse square root of the number.
- * @note This function is an implementation of the fast inverse square root algorithm.
+ * @note https://en.wikipedia.org/wiki/Fast_inverse_square_root
 */
 float q_rsqrt(float number) {
   union {
@@ -105,7 +106,6 @@ void print_vertex(Vertex v) {
 }
 
 
-
 /**
  * @brief Prints the vector to the console.
  * @param v The vector to print.
@@ -114,13 +114,12 @@ void print_vector(Vector v) {
     printf("<%f, %f, %f>", v.i, v.j, v.k);
 }
 
-
 /**
  * @brief Prints the color to the console.
  * @param c The color to print.
 */
 void print_color(ColorValue c) {
-    printf("(%d, %d, %d)", c.r, c.g, c.b);
+    printf("%X", c.greyscale);
 }
 
 
