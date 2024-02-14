@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #define DEFAULT_COLOR (ColorValue) {255, 255, 255}
 
 typedef struct Vertex {
@@ -32,8 +33,12 @@ typedef struct Face {
 } Face;
 
 Vector calculate_normal_vec(Vertex v1, Vertex v2, Vertex v3);
+Vector calculate_unit_normal_vec(Vertex v1, Vertex v2, Vertex v3);
 Vector vec_cross_product(Vector A, Vector B);
-
+float vec_dot_product(Vector A, Vector B);
+Vector vec_scalar(Vector A, float scalar);
+float q_rsqrt(float number);
+// float vec_magnitude(Vector A);
 
 void print_vertex(Vertex v);
 void print_face(Face f);
