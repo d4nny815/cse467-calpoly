@@ -28,15 +28,6 @@ int get_object_details(FILE* file, ObjectDetails* details);
 ArrayList* get_vertices(FILE* file, int vertices_cnt);
 ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices);
 
-void print_vertex(Vertex* v);
-void print_face(Face* f);
-
 void free_off_file(OffFile* off_file);
-void* free_vertex(void* vertex);
-void* free_face(void* face);
-
-
-
-
 
 #endif // OFF_FILE_H

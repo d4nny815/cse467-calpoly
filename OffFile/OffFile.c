@@ -1,7 +1,5 @@
 #include "OffFile.h"
 
-
-
 /**
  * @brief Reads an OFF file and returns an OffFile struct containing the data.
  * @param filename The name of the file to read.
@@ -123,6 +121,9 @@ ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
         face->v1 = *((Vertex*)array_list_get(vertices, v1_index));
         face->v2 = *((Vertex*)array_list_get(vertices, v2_index));
         face->v3 = *((Vertex*)array_list_get(vertices, v3_index));
+
+        face->normal = calculate_normal_vec(face->v1, face->v2, face->v3);
+        face->color = DEFAULT_COLOR;
         array_list_append(faces, (void*)face);
     }
     free(line);
@@ -130,40 +131,10 @@ ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
 }
 
 
-void print_vertex(Vertex* v) {
-    printf("(%f, %f, %f)", v->x, v->y, v->z);
-}
-
-
-void print_face(Face* f) {
-    printf("{v1:");
-    print_vertex(&(f->v1));
-    printf(" v2:");
-    print_vertex(&(f->v2));
-    printf(" v3: ");
-    print_vertex(&(f->v3));
-    printf("}\n");
-}
-
-
 /**
- * @brief function pointer to free a vertex
- * @param vertex The vertex to free.
+ * @brief Frees the OffFile struct and all of its members.
+ * @param off_file The OffFile struct to free.
 */
-void* free_vertex(void* vertex) {
-    free(vertex);
-    return NULL;
-}
-
-/**
- * @brief function pointer to free a face
- * @param face The face to free.
-*/
-void* free_face(void* face) {
-    free(face);
-    return NULL;
-}
-
 void free_off_file(OffFile* off_file) {
     array_list_free(off_file->vertices, free_vertex);
     array_list_free(off_file->faces, free_face);
