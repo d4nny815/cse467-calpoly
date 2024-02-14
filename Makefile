@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g -O
 MAIN = main
 BUILD_DIR = build
-OBJS = ArrayList OffFile Primitives Transformation
+OBJS = ArrayList OffFile Primitives Transformation Lighting
 
 PROGS = $(MAIN) 
 all : dirs $(PROGS)
@@ -20,6 +20,9 @@ $(BUILD_DIR)/OffFile.o : OffFile/OffFile.c OffFile/OffFile.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)/Transformation.o : Transformation/Transformation.c Transformation/Transformation.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)/Lighting.o : Lighting/Lighting.c Lighting/Lighting.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 dirs: 
