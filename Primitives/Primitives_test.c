@@ -13,6 +13,7 @@ void test_calculate_normal_vec() {
     Vector normal = calculate_normal_vec(v1, v2, v3);
     Vector expected = {0, 0, 1};
     assert(normal.i - expected.i < EPSILON && normal.j - expected.j < EPSILON && normal.k - expected.k < EPSILON);
+    printf("normal vector test passed\n");
 }
 
 void test_calculate_unit_normal_vec() {
@@ -22,6 +23,7 @@ void test_calculate_unit_normal_vec() {
     Vector unit_normal = calculate_unit_normal_vec(v1, v2, v3);
     Vector expected = {0, 0, 1};
     assert(unit_normal.i - expected.i < EPSILON && unit_normal.j - expected.j < EPSILON && unit_normal.k - expected.k < EPSILON);
+    printf("unit normal vector test passed\n");
 }
 
 void test_vec_cross_product() {
@@ -29,6 +31,7 @@ void test_vec_cross_product() {
     Vector B = {0, 1, 0};
     Vector cross_product = vec_cross_product(A, B);
     assert(cross_product.i == 0 && cross_product.j == 0 && cross_product.k == 1);
+    printf("cross product test passed\n");
 }
 
 void test_vec_dot_product() {
@@ -36,6 +39,7 @@ void test_vec_dot_product() {
     Vector B = {4, 5, 6};
     float dot_product = vec_dot_product(A, B);
     assert(dot_product == 32);
+    printf("dot product test passed\n");
 }
 
 void test_vec_scalar() {
@@ -43,12 +47,15 @@ void test_vec_scalar() {
     float scalar = 2;
     Vector result = vec_scalar(A, scalar);
     assert(result.i == 2 && result.j == 4 && result.k == 6);
+    printf("scalar test passed\n");
 }
 
 void test_vec_magnitude() {
-    Vector A = {3, 4, 0};
+    Vector A = {2, 3, 4};
     float magnitude = vec_magnitude(A);
-    assert(magnitude == 25);
+    float expected = 5.38516480713;
+    assert(magnitude - expected < EPSILON && expected - magnitude < EPSILON);
+    printf("magnitude test passed\n");
 }
 
 void test_q_rsqrt() {
@@ -56,6 +63,7 @@ void test_q_rsqrt() {
     float result = q_rsqrt(number);
     float expected = 0.25;
     assert(result - expected < EPSILON && expected - result < EPSILON);
+    printf("q_rsqrt test passed\n");
 }
 
 void test_print_vertex() {
@@ -73,7 +81,7 @@ void test_print_vector() {
 }
 
 void test_print_color() {
-    ColorValue c = {255, 0, 0};
+    ColorValue c = {255};
     printf("Printing color: ");
     print_color(c);
     printf("\n");
@@ -85,7 +93,7 @@ void test_print_face() {
         .v2 = {1, 0, 0},
         .v3 = {0, 1, 0},
         .normal = {0, 0, 1},
-        .color = {255, 0, 0}
+        .color = {255}
     };
     printf("Printing face:\n");
     print_face(f);
