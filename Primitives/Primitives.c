@@ -87,13 +87,13 @@ float vec_magnitude(Vector A) {
  * @note https://en.wikipedia.org/wiki/Fast_inverse_square_root
 */
 float q_rsqrt(float number) {
-  union {
-    float    f;
-    uint32_t i;
-  } conv = { .f = number };
-  conv.i  = 0x5f3759df - (conv.i >> 1);
-  conv.f *= 1.5F - (number * 0.5F * conv.f * conv.f);
-  return conv.f;
+    union {
+      float    f;
+      uint32_t i;
+    } conv = { .f = number };
+    conv.i  = 0x5f3759df - (conv.i >> 1);
+    conv.f *= 1.5F - (number * 0.5F * conv.f * conv.f);
+    return conv.f;
 }
 
 
