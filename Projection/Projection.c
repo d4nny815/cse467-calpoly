@@ -1,7 +1,7 @@
 #include "Projection.h"
 
 // TODO: test these
-
+// TODO: make sure these convert float to int coords, will make rasteration easier
 void project_Vx(Vertex* v, uint8_t screen_width) {
     int8_t shift = (int8_t)v->x >> 2;
     shift += 1;

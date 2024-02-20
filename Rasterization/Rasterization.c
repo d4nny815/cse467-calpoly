@@ -8,6 +8,7 @@
  * @return The vertices of the line.
  * @note https://www.geeksforgeeks.org/bresenhams-algorithm-for-3-d-line-drawing/
 */
+// ? do i convert float coords to int coords? 
 ArrayList* getLineVertices(Vertex v1, Vertex v2) {
     ArrayList* vertices = array_list_new();
 
@@ -125,6 +126,8 @@ int compareVertices(const Vertex v1, const Vertex v2) {
  * @return The hash of the vertex.
  * @note every vertex is hashed to a unique value.
 */
+// ? are Vertices still using float or int
+// can prob just shift over to placement for getting a hash
 uint32_t hashVertex(const Vertex v) {
     return (uint32_t)(v.x * 7 + v.y * 2 + v.z);
 }
