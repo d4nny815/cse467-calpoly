@@ -34,7 +34,7 @@ Item* hash_get_items(HashSet* hs) {
     Item* items = (Item*) malloc(sizeof(Item) * hs->size);
     if (items == NULL) return NULL;
     int j = 0;
-    for (int i=0; i<hs->capactity; i++) {
+    for (uint32_t i=0; i<hs->capactity; i++) {
         if (hs->p_elements[i].value != NULL) {
             items[j] = hs->p_elements[i];
             j++;
@@ -52,12 +52,13 @@ void hash_set_insert(HashSet* hs, void* element, int key) {
     Item item = {key, element};
 
     while (1) {
-        if (hs->p_elements[hash_value].value == NULL) {     
+        Item ele = hs->p_elements[hash_value];
+        if (ele.value == NULL) {
             hs->p_elements[hash_value] = item;
             hs->size++;
             break;
         } 
-        else if (hs->p_elements[hash_value].key == key) {
+        else if (ele.key == key) {
             hs->p_elements[hash_value] = item;
             break;
         }
@@ -74,8 +75,9 @@ void hash_set_insert(HashSet* hs, void* element, int key) {
 int hash_set_contains(HashSet* hs, int key) {
     uint32_t hash_value = hash(hs->capactity, key);
     while (1) {
-        if (hs->p_elements[hash_value].value == NULL) return 0;
-        if (hs->p_elements[hash_value].key == key) return 1;
+        Item ele = hs->p_elements[hash_value];
+        if (ele.value == NULL) return 0;
+        if (ele.key == key) return 1;
         hash_value++;
     }
 }
@@ -91,25 +93,20 @@ void* hash_set_get(HashSet* hs, int key) {
 
 void hash_set_remove(HashSet* hs, int key, void* free_func(void*)) {
     uint32_t hash_value = hash(hs->size, key);
-    while (1) {
-        if (hs->p_elements[hash_value].value == NULL) return;
-        if (hs->p_elements[hash_value].key == key) {
-            free_func(hs->p_elements[hash_value].value);
-            hs->p_elements[hash_value].value = NULL;
-            hs->size--;
-            return;
-        }
-        hash_value++;
+    if (hs->p_elements[hash_value].value == NULL) return;
+    else {
+        if (free_func != NULL) free_func(hs->p_elements[hash_value].value);
+        hs->p_elements[hash_value].value = NULL;
+        hs->size--;
     }
 }
 
 void hash_set_free(HashSet* hs, void* free_func(void*)) {
-    if (free_func != NULL) {
-        for (int i=0; i<hs->capactity; i++) {
+        for (uint32_t i=0; i<hs->capactity; i++) {
             if (hs->p_elements[i].value != NULL) {
-                free_func(hs->p_elements[i].value);
+                if (free_func != NULL) free_func(hs->p_elements[i].value);
+                hs->p_elements[i].value = NULL;
             }
-        }
     }
     free(hs->p_elements);
     free(hs);

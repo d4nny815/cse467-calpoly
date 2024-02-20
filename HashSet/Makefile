@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -std=c99 -pedantic -g -O
+CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g
 LDFLAGS = -lm
 MAIN = test_HashSet
 

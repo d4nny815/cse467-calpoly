@@ -7,7 +7,7 @@
 #include <stdint.h>
 
 typedef struct Item {
-    uint32_t key;
+    int key;
     void* value;   
 } Item;
 

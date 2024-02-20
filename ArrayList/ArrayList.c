@@ -120,7 +120,7 @@ void array_list_remove(ArrayList* array_list, int index) {
 
 void array_list_free(ArrayList* array_list, void* free_func(void*)) {
     for (size_t i=0; i<array_list->index; i++) {
-        free_func(array_list->p_elements[i]);
+        if (free_func != NULL) free_func(array_list->p_elements[i]);
     }
     free(array_list->p_elements);
     free(array_list);
