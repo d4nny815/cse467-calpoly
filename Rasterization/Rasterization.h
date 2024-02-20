@@ -11,9 +11,13 @@
 #include <math.h>
 
 
-ArrayList* getLineVertices(Vertex* v1, Vertex* v2);
+ArrayList* getLineVertices(Vertex v1, Vertex v2);
+int compareVertices(const Vertex v1, const Vertex v2);
+uint32_t hashVertex(const Vertex v);
 // Vertex* getVerticesInFace(Face* f);
 // uint8_t** rasterize(ArrayList* faces);
+
+
 
 
 #endif
