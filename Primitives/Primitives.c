@@ -107,6 +107,15 @@ void print_vertex(Vertex v) {
 
 
 /**
+ * @brief Prints the vertex to the console.
+ * @param v The vertex to print.
+*/
+void print_vertex_i(Vertex_i v) {
+    printf("(%hhu, %hhu, %hhu)", v.x, v.y, v.z);
+}
+
+
+/**
  * @brief Prints the vector to the console.
  * @param v The vector to print.
 */
@@ -144,6 +153,26 @@ void print_face(Face f) {
 
 
 /**
+ * @brief Prints the face to the console.
+ * @param f The face to print.
+*/
+void print_face_i(Face_i f) {
+    printf("Face: {\n");
+    printf("\tv1: ");
+    print_vertex_i(f.v1);
+    printf("\n\tv2: ");
+    print_vertex_i(f.v2);
+    printf("\n\tv3: ");
+    print_vertex_i(f.v3);
+    printf("\n\tnormal: ");
+    print_vector(f.normal);
+    printf("\n\tcolor: ");
+    print_color(f.color);
+    printf("\n}\n");
+}
+
+
+/**
  * @brief function pointer to free a vertex
  * @param vertex The vertex to free.
 */
@@ -151,7 +180,6 @@ void* free_vertex(void* vertex) {
     free(vertex);
     return NULL;
 }
-
 
 /**
  * @brief function pointer to free a face

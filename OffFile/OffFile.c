@@ -122,7 +122,11 @@ ArrayList* get_faces(FILE* file, int faces_cnt, ArrayList* vertices) {
         face->v2 = *((Vertex*)array_list_get(vertices, v2_index));
         face->v3 = *((Vertex*)array_list_get(vertices, v3_index));
 
-        face->normal = calculate_unit_normal_vec(face->v1, face->v2, face->v3);
+        // face->normal = calculate_unit_normal_vec(face->v1, face->v2, face->v3);
+        face->normal.i = 0;
+        face->normal.j = 0;
+        face->normal.k = 0;
+
         face->color = DEFAULT_COLOR;
         array_list_append(faces, (void*)face);
     }
