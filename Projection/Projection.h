@@ -1,6 +1,11 @@
 #ifndef PROJECTION_H
 #define PROJECTION_H
 
+#define FLOAT_SCALAR 128.0
+#define SHIFT 7 
+#define SPACE_CONST 2
+#define SPACE_TRANSLATOR (unsigned int)(SPACE_CONST*FLOAT_SCALAR)
+
 #include <stdlib.h>
 #include "../Primitives/Primitives.h"
 

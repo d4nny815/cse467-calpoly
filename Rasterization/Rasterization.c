@@ -182,18 +182,15 @@ ArrayList* getVerticesInFace(Face_i f) {
 
 /**
  * @brief Rasterize the faces.
- * @param faces The faces to rasterize.
- * @return The frame buffer of the screen.
- * @note image to be displayed on the screen of WIDTH x HEIGHT.
+ * @param faces The faces to rasterize. 
+ * @param Z_BUFFER The Z buffer. All values initialized to MAX.
+ * @param COLOR_BUFFER The color buffer. All values initialized to 0.
 */
-// uint8_t** rasterize(ArrayList* faces) {
-//     uint8_t** frame = (uint8_t**) malloc(sizeof(uint8_t*) * WIDTH);
-//     for (unsigned int i = 0; i < WIDTH; i++) {
-//         frame[i] = (uint8_t*) malloc(sizeof(uint8_t) * HEIGHT);
-//         for (unsigned int j = 0; j < HEIGHT; j++) {
-//             frame[i][j] = 0;
-//         }
-//     }
+void rasterize(ArrayList* faces, uint8_t** Z_BUFFER, uint8_t** COLOR_BUFFER) {
+    // iterate through the faces
+    // get all the blocks in the faces
+    // iterate through all the blocks
+    // determine depth of block
+    // if block is closer then overwrite colorbuffer with block color at that pixel location
 
-//     return frame;
-// }
+}

@@ -63,13 +63,24 @@ int main(void) {
 
 	// Rasterization
 	printf("\nRasterization Stage\n");
-	for (unsigned int i=0; i<projected_faces->index; i++) {
-		Face_i* face = (Face_i*) array_list_get(projected_faces, i);
+	// uint8_t Z_BUFFER[WIDTH][HEIGHT] = {DEPTH};
+	// uint8_t COLOR_BUFFER[WIDTH][HEIGHT];
+// 
+	// for (unsigned int i=0; i<WIDTH; i++) {
+		// for (unsigned int j=0; j<HEIGHT; j++) {
+			// Z_BUFFER[i][j] = DEPTH - 1;
+			// COLOR_BUFFER[i][j] = 0;
+		// }
+	// }
 
 
-		print_face_i(*face);
-	}
-
+	// for (unsigned int i=0; i<projected_faces->index; i++) {
+		// Face_i* face = (Face_i*) array_list_get(projected_faces, i);
+// 
+// 
+		// print_face_i(*face);
+	// }
+// 
 
 	array_list_free(projected_faces, free_face);
 	free_off_file(off_file);
