@@ -8,35 +8,36 @@
  * @return The vertices of the line.
  * @note https://www.geeksforgeeks.org/bresenhams-algorithm-for-3-d-line-drawing/
 */
-// ? do i convert float coords to int coords? 
-ArrayList* getLineVertices(Vertex v1, Vertex v2) {
+ArrayList* getLineVertices(Vertex_i v1, Vertex_i v2) {
     ArrayList* vertices = array_list_new();
 
     // make a copy of the first vertex
-    Vertex* v = (Vertex*) malloc(sizeof(Vertex));
+    Vertex_i* v = (Vertex_i*) malloc(sizeof(Vertex_i));
     v->x = v1.x;
     v->y = v1.y;
     v->z = v1.z;
     array_list_append(vertices, v);
 
-    int x1 = v1.x;
-    int y1 = v1.y;
-    int z1 = v1.z;
-    int x2 = v2.x;
-    int y2 = v2.y;
-    int z2 = v2.z;
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int dz = abs(z2 - z1);
+    uint8_t x1 = v1.x;
+    uint8_t y1 = v1.y;
+    uint8_t z1 = v1.z;
+    uint8_t x2 = v2.x;
+    uint8_t y2 = v2.y;
+    uint8_t z2 = v2.z;
+    int16_t dx = abs(x2 - x1);
+    int16_t dy = abs(y2 - y1);
+    int16_t dz = abs(z2 - z1);
 
-    int xs = (x2 - x1) > 0 ? 1 : -1;
-    int ys = (y2 - y1) > 0 ? 1 : -1;
-    int zs = (z2 - z1) > 0 ? 1 : -1;
+    int8_t xs = (x2 - x1) > 0 ? 1 : -1;
+    int8_t ys = (y2 - y1) > 0 ? 1 : -1;
+    int8_t zs = (z2 - z1) > 0 ? 1 : -1;
+
+    int16_t p1, p2;
 
     // Driving axis is X-axis"
     if (dx >= dy && dx >= dz) {
-        int p1 = 2 * dy - dx;
-        int p2 = 2 * dz - dx;
+        p1 = 2 * dy - dx;
+        p2 = 2 * dz - dx;
         while (x1 != x2) {
             x1 += xs;
             if (p1 >= 0) {
@@ -49,7 +50,7 @@ ArrayList* getLineVertices(Vertex v1, Vertex v2) {
             }
             p1 += 2 * dy;
             p2 += 2 * dz;
-            Vertex* v = (Vertex*) malloc(sizeof(Vertex));
+            Vertex_i* v = (Vertex_i*) malloc(sizeof(Vertex_i));
             v->x = x1;
             v->y = y1;
             v->z = z1;
@@ -60,8 +61,8 @@ ArrayList* getLineVertices(Vertex v1, Vertex v2) {
  
     // Driving axis is Y-axis"
     else if (dy >= dx && dy >= dz) {
-        int p1 = 2 * dx - dy;
-        int p2 = 2 * dz - dy;
+        p1 = 2 * dx - dy;
+        p2 = 2 * dz - dy;
         while (y1 != y2) {
             y1 += ys;
             if (p1 >= 0) {
@@ -74,7 +75,7 @@ ArrayList* getLineVertices(Vertex v1, Vertex v2) {
             }
             p1 += 2 * dx;
             p2 += 2 * dz;
-            Vertex* v = (Vertex*) malloc(sizeof(Vertex));
+            Vertex_i* v = (Vertex_i*) malloc(sizeof(Vertex_i));
             v->x = x1;
             v->y = y1;
             v->z = z1;
@@ -85,8 +86,8 @@ ArrayList* getLineVertices(Vertex v1, Vertex v2) {
     
     // Driving axis is Z-axis"
     else {
-        int p1 = 2 * dy - dz;
-        int p2 = 2 * dx - dz;
+        p1 = 2 * dy - dz;
+        p2 = 2 * dx - dz;
         while (z1 != z2) {
             z1 += zs;
             if (p1 >= 0) {
@@ -99,7 +100,7 @@ ArrayList* getLineVertices(Vertex v1, Vertex v2) {
             }
             p1 += 2 * dy;
             p2 += 2 * dx;
-            Vertex* v = (Vertex*) malloc(sizeof(Vertex));
+            Vertex_i* v = (Vertex_i*) malloc(sizeof(Vertex_i));
             v->x = x1;
             v->y = y1;
             v->z = z1;
@@ -116,7 +117,7 @@ ArrayList* getLineVertices(Vertex v1, Vertex v2) {
  * @param v2 The second vertex.
  * @return 1 if the vertices are the same, 0 otherwise.
 */
-int compareVertices(const Vertex v1, const Vertex v2) {
+int compareVertices(const Vertex_i v1, const Vertex_i v2) {
     return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
 }
 
@@ -126,39 +127,65 @@ int compareVertices(const Vertex v1, const Vertex v2) {
  * @return The hash of the vertex.
  * @note every vertex is hashed to a unique value.
 */
-// ? are Vertices still using float or int
-// can prob just shift over to placement for getting a hash
-uint32_t hashVertex(const Vertex v) {
-    return (uint32_t)(v.x * 7 + v.y * 2 + v.z);
+uint32_t hashVertex(const Vertex_i v) {
+    return (uint32_t)(v.x << 16 | v.y << 8 | v.z);
 }
 
 
-// /**
-//  * @brief Get the Vertices of a face.
-//  * @param f The face.
-//  * @return The vertices of the face.
-// */
-// Vertex* getVerticesInFace(Face* f) {
-//     ArrayList* vertices = array_list_new();
-//     ArrayList* line1 = getLineVertices(f->v1, f->v2);
-//     ArrayList* line2 = getLineVertices(f->v2, f->v3);
 
-//     for (unsigned int i = 0; i < line1->index; i++) {
-//         for (unsigned int j = 0; j < line2->index; j++) {
+/**
+ * @brief Get all the vertices in a polyfon.
+ * @param f The face.
+ * @return The vertices in the face.
+*/
+ArrayList* getVerticesInFace(Face_i f) {
+    ArrayList* vertices = array_list_new();
+    ArrayList* line1 = getLineVertices(f.v1, f.v2);
+    ArrayList* line2 = getLineVertices(f.v1, f.v3);
+
+    for (unsigned int i = 0; i < line1->index; i++) {
+        for (unsigned int j = 0; j < line2->index; j++) {
+            Vertex_i* v1 = (Vertex_i*) array_list_get(line1, i);
+            Vertex_i* v2 = (Vertex_i*) array_list_get(line2, j);
+            ArrayList* line3 = getLineVertices(*v1, *v2);
+            for (unsigned int k = 0; k < line3->index; k++) {
+                Vertex_i* v = (Vertex_i*) array_list_get(line3, k);
+
+                // This is gross and not my best work, but it works and I dont want to fix the hashset
+                // linear search through the list
+                int aleady_exists = 0;
+                for (unsigned int l = 0; l < vertices->index; l++) {
+                    Vertex_i* v_cmp = (Vertex_i*) array_list_get(vertices, l);
+                    if (compareVertices(*v, *v_cmp)) {
+                        aleady_exists = 1;
+                        break;
+                    }
+                }
+                if (aleady_exists) { continue; }
+
+                Vertex_i* v_cpy = (Vertex_i*) malloc(sizeof(Vertex_i));
+                v_cpy->x = v->x;
+                v_cpy->y = v->y;
+                v_cpy->z = v->z;
+                array_list_append(vertices, v_cpy);
+            }
+            array_list_free(line3, free_vertex);
+        }
+    }
+    array_list_free(line1, free_vertex);
+    array_list_free(line2, free_vertex);
+
+    return vertices;
+}
 
 
-//         }
-//     }
 
-// }
+/**
+ * @brief Rasterize the faces.
+ * @param faces The faces to rasterize.
+ * @return The frame buffer of the screen.
+ * @note image to be displayed on the screen of WIDTH x HEIGHT.
+*/
+uint8_t** rasterize(ArrayList* faces) {
 
-
-// /**
-//  * @brief Rasterize the faces.
-//  * @param faces The faces to rasterize.
-//  * @return The frame buffer of the screen.
-//  * @note image to be displayed on the screen of WIDTH x HEIGHT.
-// */
-// uint8_t** rasterize(ArrayList* faces) {
-
-// }
+}

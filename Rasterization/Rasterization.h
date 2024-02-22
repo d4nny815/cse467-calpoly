@@ -3,18 +3,18 @@
 #define WIDTH 256
 #define HEIGHT 256
 #define DEPTH 256
-#define MAX_POLYGON_BUFFER WIDTH+HEIGHT+DEPTH
+#define MAX_POLYGON_BUFFER WIDTH*HEIGHT*DEPTH
+#define FRAME_BUFFER_SIZE HEIGHT*WIDTH
 
 #include "../Primitives/Primitives.h"
 #include "../ArrayList/ArrayList.h"
 #include <stdlib.h>
 #include <math.h>
 
-
-ArrayList* getLineVertices(Vertex v1, Vertex v2);
-int compareVertices(const Vertex v1, const Vertex v2);
-uint32_t hashVertex(const Vertex v);
-// Vertex* getVerticesInFace(Face* f);
+ArrayList* getLineVertices(Vertex_i v1, Vertex_i v2);
+int compareVertices(const Vertex_i v1, const Vertex_i v2);
+uint32_t hashVertex(const Vertex_i v);
+ArrayList* getVerticesInFace(Face_i f);
 // uint8_t** rasterize(ArrayList* faces);
 
 
