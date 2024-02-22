@@ -1,14 +1,14 @@
 #include "Transformation.h"
 
-
-void transformVertex(Vertex* v, float* transform_matrix, int col) {
+// ? could it be faster if tranpose the matrix and then do the multiplication? 
+void transformVertex(Vertex* v, float* transform_matrix, const int num_dimensions) {
     float vertex_vector[] = {v->x, v->y, v->z, 0};
-    float* result_mat = (float*) malloc(sizeof(float) * col);
+    float* result_mat = (float*) malloc(sizeof(float) * num_dimensions);
 
-    for (int i=0; i<col; i++) {
+    for (int i=0; i<num_dimensions; i++) {
         result_mat[i] = 0; 
-        for (int j=0; j<col; j++) {
-            result_mat[i] += vertex_vector[j] * transform_matrix[j*col + i];
+        for (int j=0; j<num_dimensions; j++) {
+            result_mat[i] += vertex_vector[j] * transform_matrix[j*num_dimensions + i];
         }
     }
     v->x = result_mat[0];
@@ -16,4 +16,12 @@ void transformVertex(Vertex* v, float* transform_matrix, int col) {
     v->z = result_mat[2];
     free(result_mat);
     return;
+}
+
+void transformFace(Face* f, float* transform_matrix, const int num_dimensions) {
+    transformVertex(&f->v1, transform_matrix, num_dimensions);
+    transformVertex(&f->v2, transform_matrix, num_dimensions);
+    transformVertex(&f->v3, transform_matrix, num_dimensions);
+
+    f->normal = calculate_unit_normal_vec(f->v1, f->v2, f->v3);
 }

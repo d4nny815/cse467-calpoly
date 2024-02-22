@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include "../Primitives/Primitives.h"
 
-void project_Vx(Vertex* v, uint8_t screen_width);
-void project_Vy(Vertex* v, uint8_t screen_height);
-void project_Vz(Vertex* v, uint8_t screen_depth);
+uint8_t project_Vx(Vertex v, uint8_t screen_width);
+uint8_t project_Vy(Vertex v, uint8_t screen_height);
+uint8_t project_Vz(Vertex v, uint8_t screen_depth);
+Face_i* project_Face(Face f, uint8_t screen_width, uint8_t screen_height, uint8_t screen_depth);
 
 #endif
