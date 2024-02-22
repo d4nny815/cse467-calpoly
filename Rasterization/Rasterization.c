@@ -186,6 +186,14 @@ ArrayList* getVerticesInFace(Face_i f) {
  * @return The frame buffer of the screen.
  * @note image to be displayed on the screen of WIDTH x HEIGHT.
 */
-uint8_t** rasterize(ArrayList* faces) {
+// uint8_t** rasterize(ArrayList* faces) {
+//     uint8_t** frame = (uint8_t**) malloc(sizeof(uint8_t*) * WIDTH);
+//     for (unsigned int i = 0; i < WIDTH; i++) {
+//         frame[i] = (uint8_t*) malloc(sizeof(uint8_t) * HEIGHT);
+//         for (unsigned int j = 0; j < HEIGHT; j++) {
+//             frame[i][j] = 0;
+//         }
+//     }
 
-}
+//     return frame;
+// }

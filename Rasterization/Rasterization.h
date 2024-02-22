@@ -15,7 +15,7 @@ ArrayList* getLineVertices(Vertex_i v1, Vertex_i v2);
 int compareVertices(const Vertex_i v1, const Vertex_i v2);
 uint32_t hashVertex(const Vertex_i v);
 ArrayList* getVerticesInFace(Face_i f);
-// uint8_t** rasterize(ArrayList* faces);
+uint8_t** rasterize(ArrayList* faces);
 
 
 
