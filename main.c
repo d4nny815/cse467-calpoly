@@ -4,6 +4,7 @@
 #include "Transformation/Transformation.h"
 #include "Lighting/Lighting.h"
 #include "Projection/Projection.h"
+#include "Rasterization/Rasterization.h"
 
 // #define TRANSFORM_MATRIX (float*) {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
 
@@ -61,6 +62,13 @@ int main(void) {
 
 
 	// Rasterization
+	printf("\nRasterization Stage\n");
+	for (unsigned int i=0; i<projected_faces->index; i++) {
+		Face_i* face = (Face_i*) array_list_get(projected_faces, i);
+
+
+		print_face_i(*face);
+	}
 
 
 	array_list_free(projected_faces, free_face);

@@ -13,35 +13,24 @@ uint8_t project_Vx(Vertex v, uint8_t screen_width) {
 
     int16_t shift = (int16_t)(v.x * 128);  // 2^8, so we can use bit shift and not lose precision
     shift = ((shift >> 2) + 128) >> 1;
-    shift *= screen_width + 1;
+    shift *= screen_width;
     shift >>= 7;
     // printf("x using int math %hhu with v->x: %f\n", (uint8_t)shift, v->x);
     return (uint8_t)shift;
 }
 uint8_t project_Vy(Vertex v, uint8_t screen_height) {
-    // uint8_t shift = -(uint8_t)v->y >> 2;
-    // shift += 1;
-    // shift >>= 1;
-    // shift *= screen_height;
-    // v->y = shift;
-
-    int16_t shift = (int16_t)(v.y * 128);  // 2^8, so we can use bit shift and not lose precision
-    shift = (-(shift >> 2) + 128) >> 1;
-    shift *= screen_height + 1;
+    int16_t shift = (int16_t)(-v.y * 128);  // 2^8, so we can use bit shift and not lose precision
+    shift = ((shift >> 2) + 128) >> 1;
+    shift *= screen_height;
     shift >>= 7;
     return (uint8_t)shift;
 }
 
 uint8_t project_Vz(Vertex v, uint8_t screen_depth) {
-    // uint8_t shift = (uint8_t)v->z >> 2;
-    // shift += 1;
-    // shift >>= 1;
-    // shift *= screen_depth;
-    // v->z = shift;
 
     int16_t shift = (int16_t)(v.z * 128);  // 2^8, so we can use bit shift and not lose precision
     shift = ((shift >> 2) + 128) >> 1;
-    shift *= screen_depth + 1;
+    shift *= screen_depth;
     shift >>= 7;
     return (uint8_t)shift;
 }

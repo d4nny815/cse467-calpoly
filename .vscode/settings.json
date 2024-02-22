@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "primitives.h": "c"
+        "primitives.h": "c",
+        "arraylist.h": "c"
     }
 }
