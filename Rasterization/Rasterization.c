@@ -193,4 +193,17 @@ void rasterize(ArrayList* faces, uint8_t** Z_BUFFER, uint8_t** COLOR_BUFFER) {
     // determine depth of block
     // if block is closer then overwrite colorbuffer with block color at that pixel location
 
+    for (unsigned int i=0; i<faces->index; i++) {
+        Face_i* f = (Face_i*) array_list_get(faces, i);
+        ArrayList* blocks = getVerticesInFace(*f);
+        for (unsigned int j=0; j<blocks->index; j++) {
+            Vertex_i* v = (Vertex_i*) array_list_get(blocks, j);
+            
+            if (v->z < Z_BUFFER[v->x][v->y]) {
+                COLOR_BUFFER[v->x][v->y] = f->color.greyscale;
+            }
+        }
+        array_list_free(blocks, free_vertex);
+    }
+
 }
