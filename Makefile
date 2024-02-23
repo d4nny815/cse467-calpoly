@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g
 LDFLAGS = -lm
 MAIN = main
 BUILD_DIR = build
-OBJS = ArrayList OffFile Primitives Transformation Lighting Projection Rasterization
+OBJS = ArrayList OffFile Primitives Transformation Lighting Projection Rasterization PGMFile
 
 PROGS = $(MAIN) 
 all : dirs $(PROGS)
@@ -30,6 +30,9 @@ $(BUILD_DIR)/Projection.o : Projection/Projection.c Projection/Projection.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)/Rasterization.o : Rasterization/Rasterization.c Rasterization/Rasterization.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)/PGMFile.o : PGMFile/PGMFile.c PGMFile/PGMFile.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 

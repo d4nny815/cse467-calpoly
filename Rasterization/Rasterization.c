@@ -199,8 +199,8 @@ void rasterize(ArrayList* faces, uint8_t** Z_BUFFER, uint8_t** COLOR_BUFFER) {
         for (unsigned int j=0; j<blocks->index; j++) {
             Vertex_i* v = (Vertex_i*) array_list_get(blocks, j);
             // print_vertex_i(*v);
-            if (v->z <= Z_BUFFER[v->x][v->y]) {
-                COLOR_BUFFER[v->x][v->y] = f->color.greyscale;
+            if (v->z < Z_BUFFER[v->y][v->x]) {
+                COLOR_BUFFER[v->y][v->x] = f->color.greyscale;
             }
         }
         array_list_free(blocks, free_vertex);

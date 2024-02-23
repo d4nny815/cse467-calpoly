@@ -5,7 +5,7 @@
 #include "Lighting/Lighting.h"
 #include "Projection/Projection.h"
 #include "Rasterization/Rasterization.h"
-
+#include "PGMFile/PGMFile.h"
 
 int main(void) {
 	// reading OFF file
@@ -23,10 +23,10 @@ int main(void) {
 	// * From here on, the stages would be done by the GPU
 	// Transformation
 	printf("\nTransformation stage\n");
-	float TRANSFORM_MATRIX[] = {1, 0, 0, 0, 
-								0, 1, 0, 0, 
-								0, 0, 1, 0, 
-								0, 0, 0, 1};
+	float TRANSFORM_MATRIX[] = {.707, 0, 0, 0, 
+								0, 2, 0, 0, 
+								0, 0, 4, 0, 
+								0, 0, 0, .707};
 	const int MATRIX_DIM = 4;
 
 	for (unsigned int i=0; i<faces->index; i++) {
@@ -48,8 +48,7 @@ int main(void) {
 
 	// Projection
 	// Convert from 3D to 2D
-	// Convert float coords to uint8_t
-	printf("\nProjection Stage\n");
+		printf("\nProjection Stage\n");
 	const uint8_t SCREEN_WIDTH = 255;
 	const uint8_t SCREEN_HEIGHT = 255;
 	const uint8_t SCREEN_DEPTH = 255;
@@ -81,13 +80,15 @@ int main(void) {
 	rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER);
 
 
-	for (unsigned int i=0; i<WIDTH; i++) {
-		for (unsigned int j=0; j<HEIGHT; j++) {
-			printf("%d ", COLOR_BUFFER[i][j]);
-		}
-		printf("\n");
-	}
+	// for (unsigned int i=0; i<WIDTH; i++) {
+	// 	for (unsigned int j=0; j<HEIGHT; j++) {
+	// 		printf("%d ", COLOR_BUFFER[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
 
+	// Make PGM file
+	makePGMFile(WIDTH, HEIGHT, DEPTH - 1, COLOR_BUFFER, "teapot.pgm");
 	// Freeing memory
 	for (unsigned int i=0; i<WIDTH; i++) {
 		free(Z_BUFFER[i]);
