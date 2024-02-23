@@ -11,12 +11,12 @@ int main(void) {
 	// reading OFF file
 	// * This stage would be done by the CPU
 	printf("Reading OffFile\n");
-	// OffFile* off_file = read_off_file("teapot.off");
-	OffFile* off_file = read_off_file("example.off");
-	for (unsigned int i=0; i<off_file->faces->index; i++) {
-		Face* face = (Face*) array_list_get(off_file->faces, i);
-		print_face(*face);
-	}
+	OffFile* off_file = read_off_file("teapot.off");
+	// OffFile* off_file = read_off_file("example.off");
+	// for (unsigned int i=0; i<off_file->faces->index; i++) {
+		// Face* face = (Face*) array_list_get(off_file->faces, i);
+		// print_face(*face);
+	// }
 	ArrayList* faces = off_file->faces; // quick access to the faces
 
 
@@ -32,7 +32,7 @@ int main(void) {
 	for (unsigned int i=0; i<faces->index; i++) {
 		Face* face = (Face*) array_list_get(faces, i);
 		transformFace(face, TRANSFORM_MATRIX, MATRIX_DIM);
-		print_face(*face);
+		// print_face(*face);
 	}
 
 
@@ -42,7 +42,7 @@ int main(void) {
 	for (unsigned int i=0; i<faces->index; i++) {
 		Face* face = (Face*) array_list_get(faces, i);
 		face->color.greyscale = calc_color_intensity(face->color, face->normal, LIGHT_VEC);
-		print_face(*face);
+		// print_face(*face);
 	}
 	
 
@@ -58,7 +58,7 @@ int main(void) {
 		Face* face = (Face*) array_list_get(faces, i);
 		Face_i* projected_face = project_Face(*face, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_DEPTH);
 		array_list_append(projected_faces, (void*)projected_face);
-		print_face_i(*projected_face);
+		// print_face_i(*projected_face);
 	}
 
 
@@ -66,19 +66,19 @@ int main(void) {
 	printf("\nRasterization Stage\n");
 	// uint8_t Z_BUFFER[WIDTH][HEIGHT];
 	// uint8_t COLOR_BUFFER[WIDTH][HEIGHT];
-	// uint8_t** Z_BUFFER = (uint8_t**) malloc(WIDTH * sizeof(uint8_t*));
+	uint8_t** Z_BUFFER = (uint8_t**) malloc(WIDTH * sizeof(uint8_t*));
 	uint8_t** COLOR_BUFFER = (uint8_t**) malloc(WIDTH * sizeof(uint8_t*));
 
 	for (unsigned int i=0; i<WIDTH; i++) {
-		// Z_BUFFER[i] = (uint8_t*) malloc(HEIGHT * sizeof(uint8_t));
+		Z_BUFFER[i] = (uint8_t*) malloc(HEIGHT * sizeof(uint8_t));
 		COLOR_BUFFER[i] = (uint8_t*) malloc(HEIGHT * sizeof(uint8_t));
 		for (unsigned int j=0; j<HEIGHT; j++) {
-			// Z_BUFFER[i][j] = DEPTH - 1;
+			Z_BUFFER[i][j] = DEPTH - 1;
 			COLOR_BUFFER[i][j] = 0;
 		}
 	}
 
-	// rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER);
+	rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER);
 
 
 	for (unsigned int i=0; i<WIDTH; i++) {
@@ -87,6 +87,14 @@ int main(void) {
 		}
 		printf("\n");
 	}
+
+	// Freeing memory
+	for (unsigned int i=0; i<WIDTH; i++) {
+		free(Z_BUFFER[i]);
+		free(COLOR_BUFFER[i]);
+	}
+	free(Z_BUFFER);
+	free(COLOR_BUFFER);
 
 
 	array_list_free(projected_faces, free_face);

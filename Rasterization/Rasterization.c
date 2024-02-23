@@ -150,7 +150,6 @@ ArrayList* getVerticesInFace(Face_i f) {
             ArrayList* line3 = getLineVertices(*v1, *v2);
             for (unsigned int k = 0; k < line3->index; k++) {
                 Vertex_i* v = (Vertex_i*) array_list_get(line3, k);
-
                 // This is gross and not my best work, but it works and I dont want to fix the hashset
                 // linear search through the list
                 int aleady_exists = 0;
@@ -163,6 +162,7 @@ ArrayList* getVerticesInFace(Face_i f) {
                 }
                 if (aleady_exists) { continue; }
 
+                // print_vertex_i(*v);
                 Vertex_i* v_cpy = (Vertex_i*) malloc(sizeof(Vertex_i));
                 v_cpy->x = v->x;
                 v_cpy->y = v->y;
@@ -198,8 +198,8 @@ void rasterize(ArrayList* faces, uint8_t** Z_BUFFER, uint8_t** COLOR_BUFFER) {
         ArrayList* blocks = getVerticesInFace(*f);
         for (unsigned int j=0; j<blocks->index; j++) {
             Vertex_i* v = (Vertex_i*) array_list_get(blocks, j);
-            
-            if (v->z < Z_BUFFER[v->x][v->y]) {
+            // print_vertex_i(*v);
+            if (v->z <= Z_BUFFER[v->x][v->y]) {
                 COLOR_BUFFER[v->x][v->y] = f->color.greyscale;
             }
         }
