@@ -5,7 +5,7 @@
 #include <math.h>
 
 
-uint8_t calc_color_intensity(ColorValue initial_color, Vector normal_vec, Vector light_vec);
+ColorValue calc_color_intensity(ColorValue initial_color, Vector normal_vec, Vector light_vec);
 
 
 #endif

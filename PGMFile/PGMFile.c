@@ -8,8 +8,8 @@ void makePGMFile(const unsigned int width, const unsigned int height, const int 
     fprintf(file, "%d %d\n", width, height);
     fprintf(file, "%d\n", max_greyscale);
 
-    for (unsigned int i=0; i<width; i++) {
-        for (unsigned int j=0; j<height; j++) {
+    for (unsigned int i=0; i<height; i++) {
+        for (unsigned int j=0; j<width; j++) {
             fprintf(file, "%hhu ", data[i][j]);
         }
         fprintf(file, "\n");

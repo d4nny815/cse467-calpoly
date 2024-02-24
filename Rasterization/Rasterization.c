@@ -132,7 +132,6 @@ uint32_t hashVertex(const Vertex_i v) {
 }
 
 
-
 /**
  * @brief Get all the vertices in a polyfon.
  * @param f The face.
@@ -198,8 +197,8 @@ void rasterize(ArrayList* faces, uint8_t** Z_BUFFER, uint8_t** COLOR_BUFFER) {
         ArrayList* blocks = getVerticesInFace(*f);
         for (unsigned int j=0; j<blocks->index; j++) {
             Vertex_i* v = (Vertex_i*) array_list_get(blocks, j);
-            // print_vertex_i(*v);
             if (v->z < Z_BUFFER[v->y][v->x]) {
+                Z_BUFFER[v->y][v->x] = v->z;
                 COLOR_BUFFER[v->y][v->x] = f->color.greyscale;
             }
         }
