@@ -1,9 +1,11 @@
 #include "Projection.h"
 
-// TODO: test these
-// TODO: make sure these convert float to int coords, will make rasteration easier
-
-// Project objects on the screen space
+/**
+ * @brief Projects a vertex onto the x-axis of the screen
+ * @param v The vertex to project.
+ * @param screen_width The width of the screen.
+ * @return The x-coordinate of the projected vertex.
+*/
 uint8_t project_Vx(Vertex v, uint8_t screen_width) {
     // for testing purposes, to see accuracy compared to int math
     // double x = (((double)v->x / 4.0) + 1) / 2.0;
@@ -11,41 +13,54 @@ uint8_t project_Vx(Vertex v, uint8_t screen_width) {
     // v->x = x;
     // printf("x using float math %f with v->x: %f\n", x, v->x);
 
-    int16_t shift = (int16_t)(v.x * 128);  // 2^8, so we can use bit shift and not lose precision
-    shift = ((shift >> 2) + 128) >> 1;
-    shift *= screen_width + 1;
-    shift >>= 7;
+    int16_t shift = (int16_t)(v.x * FLOAT_SCALAR);  // 2^8, so we can use bit shift and not lose precision
+    shift = ((shift >> 2) + SPACE_TRANSLATOR) >> 1;
+    shift *= screen_width;
+    shift >>= SHIFT;
     // printf("x using int math %hhu with v->x: %f\n", (uint8_t)shift, v->x);
     return (uint8_t)shift;
 }
+
+
+/**
+ * @brief Projects a vertex onto the y-axis of the screen
+ * @param v The vertex to project.
+ * @param screen_height The height of the screen.
+ * @return The y-coordinate of the projected vertex.
+*/
 uint8_t project_Vy(Vertex v, uint8_t screen_height) {
-    // uint8_t shift = -(uint8_t)v->y >> 2;
-    // shift += 1;
-    // shift >>= 1;
-    // shift *= screen_height;
-    // v->y = shift;
-
-    int16_t shift = (int16_t)(v.y * 128);  // 2^8, so we can use bit shift and not lose precision
-    shift = (-(shift >> 2) + 128) >> 1;
-    shift *= screen_height + 1;
-    shift >>= 7;
+    int16_t shift = (int16_t)(-v.y * FLOAT_SCALAR);  // 2^8, so we can use bit shift and not lose precision
+    shift = ((shift >> 2) + SPACE_TRANSLATOR) >> 1;
+    shift *= screen_height;
+    shift >>= SHIFT;
     return (uint8_t)shift;
 }
 
+
+/**
+ * @brief Projects a vertex onto the z-axis of the screen
+ * @param v The vertex to project.
+ * @param screen_depth The depth of the screen.
+ * @return The z-coordinate of the projected vertex.
+*/
 uint8_t project_Vz(Vertex v, uint8_t screen_depth) {
-    // uint8_t shift = (uint8_t)v->z >> 2;
-    // shift += 1;
-    // shift >>= 1;
-    // shift *= screen_depth;
-    // v->z = shift;
 
-    int16_t shift = (int16_t)(v.z * 128);  // 2^8, so we can use bit shift and not lose precision
-    shift = ((shift >> 2) + 128) >> 1;
-    shift *= screen_depth + 1;
-    shift >>= 7;
+    int16_t shift = (int16_t)(v.z * FLOAT_SCALAR);  // 2^8, so we can use bit shift and not lose precision
+    shift = ((shift >> 2) + SPACE_TRANSLATOR) >> 1;
+    shift *= screen_depth;
+    shift >>= SHIFT;
     return (uint8_t)shift;
 }
 
+
+/**
+ * @brief Projects a face onto the screen
+ * @param f The face to project.
+ * @param screen_width The width of the screen.
+ * @param screen_height The height of the screen.
+ * @param screen_depth The depth of the screen.
+ * @return The projected face.
+*/
 Face_i* project_Face(Face f, uint8_t screen_width, uint8_t screen_height, uint8_t screen_depth) {
     Face_i* new_f = (Face_i*) malloc(sizeof(Face_i));
     if (new_f == NULL) { return NULL; }
