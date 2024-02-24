@@ -85,7 +85,7 @@ int main(void) {
 	// Make PGM file
 	makePGMFile(WIDTH, HEIGHT, DEPTH - 1, COLOR_BUFFER, "teapot.pgm");
 	// Freeing memory
-	for (unsigned int i=0; i<WIDTH; i++) {
+	for (unsigned int i=0; i<HEIGHT; i++) {
 		free(Z_BUFFER[i]);
 		free(COLOR_BUFFER[i]);
 	}
