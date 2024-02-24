@@ -2,8 +2,8 @@
 #define RASTERIZATION_H
 
 // Where DISPLAY_WIDTH and DISPLAY_HEIGHT are the dimensions of the display
-#define WIDTH 200
-#define HEIGHT 100
+#define WIDTH 256
+#define HEIGHT 256
 #define DEPTH 256
 // ? what if i calc the max amount of blocks a polygon can be and that becomes the MAX POLYGON Buffer size 
 #define MAX_POLYGON_BUFFER WIDTH*HEIGHT*DEPTH // need a 2^24 = 16MB Memory Block if storing 8b color

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libOffFile.a CMakeFiles/OffFile.dir/OffFile/OffFile.c.o
+/usr/bin/ranlib libOffFile.a
