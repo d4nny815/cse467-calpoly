@@ -52,6 +52,9 @@ CMakeFiles/main.dir/main.c.o: \
  /home/danny/Documents/school/cpe400/gpu_simulator/Projection/Projection.h \
  /home/danny/Documents/school/cpe400/gpu_simulator/Projection/../Primitives/Primitives.h \
  /home/danny/Documents/school/cpe400/gpu_simulator/Rasterization/Rasterization.h \
+ /usr/include/wait.h /usr/include/x86_64-linux-gnu/sys/wait.h \
+ /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /home/danny/Documents/school/cpe400/gpu_simulator/Rasterization/../Primitives/Primitives.h \
  /home/danny/Documents/school/cpe400/gpu_simulator/Rasterization/../ArrayList/ArrayList.h \
  /home/danny/Documents/school/cpe400/gpu_simulator/PGMFile/PGMFile.h

@@ -59,7 +59,7 @@ uint8_t project_Vz(Vertex v, uint8_t screen_depth) {
  * @param screen_width The width of the screen.
  * @param screen_height The height of the screen.
  * @param screen_depth The depth of the screen.
- * @return The projected face.
+ * @return pointer to the projected face, NULL if malloc fails
 */
 Face_i* project_Face(Face f, uint8_t screen_width, uint8_t screen_height, uint8_t screen_depth) {
     Face_i* new_f = (Face_i*) malloc(sizeof(Face_i));

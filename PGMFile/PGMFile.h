@@ -7,6 +7,6 @@
 #include <fcntl.h>
 #include <stdint.h>
 
-void makePGMFile(const unsigned int width, const unsigned int height, const int max_greyscale, uint8_t** data, const char* filename);
+void makePGMFile(const unsigned int width, const unsigned int height, const int max_greyscale, uint8_t* data, const char* filename);
 
 #endif

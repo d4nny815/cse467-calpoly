@@ -30,10 +30,10 @@ int main(void) {
 	// * From here on, the stages would be done by the GPU
 	// Transformation
 	printf("\nTransformation stage\n");
-	float TRANSFORM_MATRIX[] = {1, 0, 0, 0, 
-								0, 1, 0, 0, 
-								0, 0, 1, 0, 
-								0, 0, 0, 1};
+	float TRANSFORM_MATRIX[] = {-1.2, 0, 0, 0, 
+								0, 2, 0, 0, 
+								0, 0, 1.2, 0, 
+								0, 0, 0, .707};
 	const int MATRIX_DIM = 4;
 
 	for (unsigned int i=0; i<faces->index; i++) {
@@ -53,9 +53,9 @@ int main(void) {
 
 	// Projection
 	// Convert from 3D to 2D
-		printf("\nProjection Stage\n");
-	const uint8_t SCREEN_WIDTH = WIDTH - 1;
-	const uint8_t SCREEN_HEIGHT = HEIGHT - 1;
+	printf("\nProjection Stage\n");
+	const uint8_t SCREEN_WIDTH = DISPLAY_WIDTH - 1;
+	const uint8_t SCREEN_HEIGHT = DISPLAY_HEIGHT - 1;
 	const uint8_t SCREEN_DEPTH = DEPTH - 1;
 	ArrayList* projected_faces = array_list_new(); // this should overwrite the old faces
 	for (unsigned int i=0; i<faces->index; i++) {
@@ -67,28 +67,18 @@ int main(void) {
 
 	// Rasterization
 	printf("\nRasterization Stage\n");
-	uint8_t** Z_BUFFER = (uint8_t**) malloc(HEIGHT * sizeof(uint8_t*));
-	uint8_t** COLOR_BUFFER = (uint8_t**) malloc(HEIGHT * sizeof(uint8_t*));
 
-	for (unsigned int i=0; i<HEIGHT; i++) {
-		Z_BUFFER[i] = (uint8_t*) malloc(WIDTH * sizeof(uint8_t));
-		COLOR_BUFFER[i] = (uint8_t*) malloc(WIDTH * sizeof(uint8_t));
-		for (unsigned int j=0; j<WIDTH; j++) {
-			Z_BUFFER[i][j] = DEPTH - 1;
-			COLOR_BUFFER[i][j] = 0;
-		}
-	}
+	uint8_t* Z_BUFFER = (uint8_t*) malloc(FRAME_BUFFER_SIZE * sizeof(uint8_t));
+	uint8_t* COLOR_BUFFER = (uint8_t*) malloc(FRAME_BUFFER_SIZE * sizeof(uint8_t));
+	memset(Z_BUFFER, DEPTH - 1, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+	memset(COLOR_BUFFER, 0, FRAME_BUFFER_SIZE * sizeof(uint8_t));
 
-
-	rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER);
+	parallel_rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER, 32);
 
 	// Make PGM file
-	makePGMFile(WIDTH, HEIGHT, DEPTH - 1, COLOR_BUFFER, "teapot.pgm");
-	// Freeing memory
-	for (unsigned int i=0; i<HEIGHT; i++) {
-		free(Z_BUFFER[i]);
-		free(COLOR_BUFFER[i]);
-	}
+	printf("\nMaking PGM file\n");
+	makePGMFile(DISPLAY_WIDTH, DISPLAY_HEIGHT, DEPTH - 1, COLOR_BUFFER, "teapot.pgm");
+
 	free(Z_BUFFER);
 	free(COLOR_BUFFER);
 

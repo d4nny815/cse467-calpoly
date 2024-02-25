@@ -2,6 +2,7 @@
     "files.associations": {
         "primitives.h": "c",
         "arraylist.h": "c",
-        "lighting.h": "c"
+        "lighting.h": "c",
+        "pgmfile.h": "c"
     }
 }
