@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRasterization.a CMakeFiles/Rasterization.dir/Rasterization/Rasterization.c.o
+/usr/bin/ranlib libRasterization.a

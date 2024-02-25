@@ -1,0 +1,2 @@
+/usr/bin/ar qc libArrayList.a CMakeFiles/ArrayList.dir/ArrayList/ArrayList.c.o
+/usr/bin/ranlib libArrayList.a

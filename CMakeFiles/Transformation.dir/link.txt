@@ -1,0 +1,2 @@
+/usr/bin/ar qc libTransformation.a CMakeFiles/Transformation.dir/Transformation/Transformation.c.o
+/usr/bin/ranlib libTransformation.a

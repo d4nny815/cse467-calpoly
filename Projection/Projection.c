@@ -17,6 +17,12 @@ uint8_t project_Vx(Vertex v, uint8_t screen_width) {
     shift = ((shift >> 2) + SPACE_TRANSLATOR) >> 1;
     shift *= screen_width;
     shift >>= SHIFT;
+    if (shift < 0) {
+    shift = 0;
+    } else if (shift > screen_width) {
+    shift = screen_width;
+    }
+
     // printf("x using int math %hhu with v->x: %f\n", (uint8_t)shift, v->x);
     return (uint8_t)shift;
 }
@@ -33,6 +39,11 @@ uint8_t project_Vy(Vertex v, uint8_t screen_height) {
     shift = ((shift >> 2) + SPACE_TRANSLATOR) >> 1;
     shift *= screen_height;
     shift >>= SHIFT;
+    if (shift < 0) {
+        shift = 0;
+    } else if (shift > screen_height) {
+        shift = screen_height;
+    }
     return (uint8_t)shift;
 }
 
@@ -49,6 +60,12 @@ uint8_t project_Vz(Vertex v, uint8_t screen_depth) {
     shift = ((shift >> 2) + SPACE_TRANSLATOR) >> 1;
     shift *= screen_depth;
     shift >>= SHIFT;
+    if (shift < 0) {
+        shift = 0;
+    } else if (shift > screen_depth) {
+        shift = screen_depth;
+    }
+
     return (uint8_t)shift;
 }
 
@@ -59,7 +76,7 @@ uint8_t project_Vz(Vertex v, uint8_t screen_depth) {
  * @param screen_width The width of the screen.
  * @param screen_height The height of the screen.
  * @param screen_depth The depth of the screen.
- * @return The projected face.
+ * @return pointer to the projected face, NULL if malloc fails
 */
 Face_i* project_Face(Face f, uint8_t screen_width, uint8_t screen_height, uint8_t screen_depth) {
     Face_i* new_f = (Face_i*) malloc(sizeof(Face_i));
