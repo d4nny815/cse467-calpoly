@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/clean_custom"
+  "CMakeFiles/dirs"
 )
 
 # Per-language clean rules from dependency scanning.
 foreach(lang )
-  include(CMakeFiles/clean_custom.dir/cmake_clean_${lang}.cmake OPTIONAL)
+  include(CMakeFiles/dirs.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

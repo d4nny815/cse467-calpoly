@@ -1,4 +1,3 @@
-/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/main.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/ArrayList.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/OffFile.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/Primitives.dir
@@ -7,7 +6,8 @@
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/Projection.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/Rasterization.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/PGMFile.dir
-/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/make_build_dir.dir
-/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/clean_custom.dir
+/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/GPUSim.dir
+/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/dirs.dir
+/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/clean_all.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/edit_cache.dir
 /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles/rebuild_cache.dir

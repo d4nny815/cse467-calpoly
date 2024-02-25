@@ -63,7 +63,6 @@ CMAKE_BINARY_DIR = /home/danny/Documents/school/cpe400/gpu_simulator
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/main.dir/all
 all: CMakeFiles/ArrayList.dir/all
 all: CMakeFiles/OffFile.dir/all
 all: CMakeFiles/Primitives.dir/all
@@ -72,7 +71,7 @@ all: CMakeFiles/Lighting.dir/all
 all: CMakeFiles/Projection.dir/all
 all: CMakeFiles/Rasterization.dir/all
 all: CMakeFiles/PGMFile.dir/all
-all: CMakeFiles/make_build_dir.dir/all
+all: CMakeFiles/GPUSim.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -80,7 +79,6 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/main.dir/clean
 clean: CMakeFiles/ArrayList.dir/clean
 clean: CMakeFiles/OffFile.dir/clean
 clean: CMakeFiles/Primitives.dir/clean
@@ -89,42 +87,10 @@ clean: CMakeFiles/Lighting.dir/clean
 clean: CMakeFiles/Projection.dir/clean
 clean: CMakeFiles/Rasterization.dir/clean
 clean: CMakeFiles/PGMFile.dir/clean
-clean: CMakeFiles/make_build_dir.dir/clean
-clean: CMakeFiles/clean_custom.dir/clean
+clean: CMakeFiles/GPUSim.dir/clean
+clean: CMakeFiles/dirs.dir/clean
+clean: CMakeFiles/clean_all.dir/clean
 .PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/main.dir
-
-# All Build rule for target.
-CMakeFiles/main.dir/all: CMakeFiles/ArrayList.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/PGMFile.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/OffFile.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/Primitives.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/Projection.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/Rasterization.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/Transformation.dir/all
-CMakeFiles/main.dir/all: CMakeFiles/Lighting.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=17,18 "Built target main"
-.PHONY : CMakeFiles/main.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 18
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
-.PHONY : CMakeFiles/main.dir/rule
-
-# Convenience name for target.
-main: CMakeFiles/main.dir/rule
-.PHONY : main
-
-# clean rule for target.
-CMakeFiles/main.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
-.PHONY : CMakeFiles/main.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/ArrayList.dir
@@ -159,7 +125,7 @@ CMakeFiles/ArrayList.dir/clean:
 CMakeFiles/OffFile.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OffFile.dir/build.make CMakeFiles/OffFile.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OffFile.dir/build.make CMakeFiles/OffFile.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=5,6 "Built target OffFile"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=7,8 "Built target OffFile"
 .PHONY : CMakeFiles/OffFile.dir/all
 
 # Build rule for subdir invocation for target.
@@ -185,7 +151,7 @@ CMakeFiles/OffFile.dir/clean:
 CMakeFiles/Primitives.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Primitives.dir/build.make CMakeFiles/Primitives.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Primitives.dir/build.make CMakeFiles/Primitives.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=9,10 "Built target Primitives"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=11,12 "Built target Primitives"
 .PHONY : CMakeFiles/Primitives.dir/all
 
 # Build rule for subdir invocation for target.
@@ -211,7 +177,7 @@ CMakeFiles/Primitives.dir/clean:
 CMakeFiles/Transformation.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Transformation.dir/build.make CMakeFiles/Transformation.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Transformation.dir/build.make CMakeFiles/Transformation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=15,16 "Built target Transformation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=17,18 "Built target Transformation"
 .PHONY : CMakeFiles/Transformation.dir/all
 
 # Build rule for subdir invocation for target.
@@ -237,7 +203,7 @@ CMakeFiles/Transformation.dir/clean:
 CMakeFiles/Lighting.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lighting.dir/build.make CMakeFiles/Lighting.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lighting.dir/build.make CMakeFiles/Lighting.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=3,4 "Built target Lighting"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=5,6 "Built target Lighting"
 .PHONY : CMakeFiles/Lighting.dir/all
 
 # Build rule for subdir invocation for target.
@@ -263,7 +229,7 @@ CMakeFiles/Lighting.dir/clean:
 CMakeFiles/Projection.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projection.dir/build.make CMakeFiles/Projection.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Projection.dir/build.make CMakeFiles/Projection.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=11,12 "Built target Projection"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=13,14 "Built target Projection"
 .PHONY : CMakeFiles/Projection.dir/all
 
 # Build rule for subdir invocation for target.
@@ -289,7 +255,7 @@ CMakeFiles/Projection.dir/clean:
 CMakeFiles/Rasterization.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rasterization.dir/build.make CMakeFiles/Rasterization.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Rasterization.dir/build.make CMakeFiles/Rasterization.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=13,14 "Built target Rasterization"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=15,16 "Built target Rasterization"
 .PHONY : CMakeFiles/Rasterization.dir/all
 
 # Build rule for subdir invocation for target.
@@ -315,7 +281,7 @@ CMakeFiles/Rasterization.dir/clean:
 CMakeFiles/PGMFile.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PGMFile.dir/build.make CMakeFiles/PGMFile.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PGMFile.dir/build.make CMakeFiles/PGMFile.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=7,8 "Built target PGMFile"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=9,10 "Built target PGMFile"
 .PHONY : CMakeFiles/PGMFile.dir/all
 
 # Build rule for subdir invocation for target.
@@ -335,56 +301,89 @@ CMakeFiles/PGMFile.dir/clean:
 .PHONY : CMakeFiles/PGMFile.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/make_build_dir.dir
+# Target rules for target CMakeFiles/GPUSim.dir
 
 # All Build rule for target.
-CMakeFiles/make_build_dir.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/make_build_dir.dir/build.make CMakeFiles/make_build_dir.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/make_build_dir.dir/build.make CMakeFiles/make_build_dir.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num= "Built target make_build_dir"
-.PHONY : CMakeFiles/make_build_dir.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/ArrayList.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/OffFile.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/Primitives.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/Transformation.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/Lighting.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/Projection.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/Rasterization.dir/all
+CMakeFiles/GPUSim.dir/all: CMakeFiles/PGMFile.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num=3,4 "Built target GPUSim"
+.PHONY : CMakeFiles/GPUSim.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/make_build_dir.dir/rule: cmake_check_build_system
+CMakeFiles/GPUSim.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 18
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/GPUSim.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/make_build_dir.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
-.PHONY : CMakeFiles/make_build_dir.dir/rule
+.PHONY : CMakeFiles/GPUSim.dir/rule
 
 # Convenience name for target.
-make_build_dir: CMakeFiles/make_build_dir.dir/rule
-.PHONY : make_build_dir
+GPUSim: CMakeFiles/GPUSim.dir/rule
+.PHONY : GPUSim
 
 # clean rule for target.
-CMakeFiles/make_build_dir.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/make_build_dir.dir/build.make CMakeFiles/make_build_dir.dir/clean
-.PHONY : CMakeFiles/make_build_dir.dir/clean
+CMakeFiles/GPUSim.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/clean
+.PHONY : CMakeFiles/GPUSim.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/clean_custom.dir
+# Target rules for target CMakeFiles/dirs.dir
 
 # All Build rule for target.
-CMakeFiles/clean_custom.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_custom.dir/build.make CMakeFiles/clean_custom.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_custom.dir/build.make CMakeFiles/clean_custom.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num= "Built target clean_custom"
-.PHONY : CMakeFiles/clean_custom.dir/all
+CMakeFiles/dirs.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dirs.dir/build.make CMakeFiles/dirs.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dirs.dir/build.make CMakeFiles/dirs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num= "Built target dirs"
+.PHONY : CMakeFiles/dirs.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/clean_custom.dir/rule: cmake_check_build_system
+CMakeFiles/dirs.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/clean_custom.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dirs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
-.PHONY : CMakeFiles/clean_custom.dir/rule
+.PHONY : CMakeFiles/dirs.dir/rule
 
 # Convenience name for target.
-clean_custom: CMakeFiles/clean_custom.dir/rule
-.PHONY : clean_custom
+dirs: CMakeFiles/dirs.dir/rule
+.PHONY : dirs
 
 # clean rule for target.
-CMakeFiles/clean_custom.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_custom.dir/build.make CMakeFiles/clean_custom.dir/clean
-.PHONY : CMakeFiles/clean_custom.dir/clean
+CMakeFiles/dirs.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dirs.dir/build.make CMakeFiles/dirs.dir/clean
+.PHONY : CMakeFiles/dirs.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/clean_all.dir
+
+# All Build rule for target.
+CMakeFiles/clean_all.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_all.dir/build.make CMakeFiles/clean_all.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_all.dir/build.make CMakeFiles/clean_all.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles --progress-num= "Built target clean_all"
+.PHONY : CMakeFiles/clean_all.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/clean_all.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/clean_all.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danny/Documents/school/cpe400/gpu_simulator/CMakeFiles 0
+.PHONY : CMakeFiles/clean_all.dir/rule
+
+# Convenience name for target.
+clean_all: CMakeFiles/clean_all.dir/rule
+.PHONY : clean_all
+
+# clean rule for target.
+CMakeFiles/clean_all.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_all.dir/build.make CMakeFiles/clean_all.dir/clean
+.PHONY : CMakeFiles/clean_all.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

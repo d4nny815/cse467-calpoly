@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/main.dir/main.c.o -o main  -lm libArrayList.a libOffFile.a libPrimitives.a libTransformation.a libLighting.a libProjection.a libRasterization.a libPGMFile.a -lm 

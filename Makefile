@@ -117,19 +117,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main
-
-# Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
-.PHONY : main
-
-# fast build rule for target.
-main/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
-
-#=============================================================================
 # Target rules for targets named ArrayList
 
 # Build rule for target.
@@ -234,30 +221,43 @@ PGMFile/fast:
 .PHONY : PGMFile/fast
 
 #=============================================================================
-# Target rules for targets named make_build_dir
+# Target rules for targets named GPUSim
 
 # Build rule for target.
-make_build_dir: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 make_build_dir
-.PHONY : make_build_dir
+GPUSim: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 GPUSim
+.PHONY : GPUSim
 
 # fast build rule for target.
-make_build_dir/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/make_build_dir.dir/build.make CMakeFiles/make_build_dir.dir/build
-.PHONY : make_build_dir/fast
+GPUSim/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/build
+.PHONY : GPUSim/fast
 
 #=============================================================================
-# Target rules for targets named clean_custom
+# Target rules for targets named dirs
 
 # Build rule for target.
-clean_custom: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean_custom
-.PHONY : clean_custom
+dirs: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dirs
+.PHONY : dirs
 
 # fast build rule for target.
-clean_custom/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_custom.dir/build.make CMakeFiles/clean_custom.dir/build
-.PHONY : clean_custom/fast
+dirs/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dirs.dir/build.make CMakeFiles/dirs.dir/build
+.PHONY : dirs/fast
+
+#=============================================================================
+# Target rules for targets named clean_all
+
+# Build rule for target.
+clean_all: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean_all
+.PHONY : clean_all
+
+# fast build rule for target.
+clean_all/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_all.dir/build.make CMakeFiles/clean_all.dir/build
+.PHONY : clean_all/fast
 
 ArrayList/ArrayList.o: ArrayList/ArrayList.c.o
 .PHONY : ArrayList/ArrayList.o
@@ -456,7 +456,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -464,7 +464,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -472,7 +472,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/GPUSim.dir/build.make CMakeFiles/GPUSim.dir/main.c.s
 .PHONY : main.c.s
 
 # Help Target
@@ -483,9 +483,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... clean_custom"
-	@echo "... make_build_dir"
+	@echo "... clean_all"
+	@echo "... dirs"
 	@echo "... ArrayList"
+	@echo "... GPUSim"
 	@echo "... Lighting"
 	@echo "... OffFile"
 	@echo "... PGMFile"
@@ -493,7 +494,6 @@ help:
 	@echo "... Projection"
 	@echo "... Rasterization"
 	@echo "... Transformation"
-	@echo "... main"
 	@echo "... ArrayList/ArrayList.o"
 	@echo "... ArrayList/ArrayList.i"
 	@echo "... ArrayList/ArrayList.s"

@@ -7,7 +7,7 @@
 #include "Rasterization/Rasterization.h"
 #include "PGMFile/PGMFile.h"
 
-int main(void) {
+int main(int argc, char** argv) {
 	// reading OFF file
 	// * This stage would be done by the CPU
 	printf("Reading OffFile\n");
@@ -30,10 +30,10 @@ int main(void) {
 	// * From here on, the stages would be done by the GPU
 	// Transformation
 	printf("\nTransformation stage\n");
-	float TRANSFORM_MATRIX[] = {-1.2, 0, 0, 0, 
-								0, 2, 0, 0, 
-								0, 0, 1.2, 0, 
-								0, 0, 0, .707};
+	float TRANSFORM_MATRIX[] = {-1, 0, 0, 0, 
+								0, 1, 0, 0, 
+								0, 0, 1, 0, 
+								0, 0, 0, 1};
 	const int MATRIX_DIM = 4;
 
 	for (unsigned int i=0; i<faces->index; i++) {
@@ -72,8 +72,14 @@ int main(void) {
 	uint8_t* COLOR_BUFFER = (uint8_t*) malloc(FRAME_BUFFER_SIZE * sizeof(uint8_t));
 	memset(Z_BUFFER, DEPTH - 1, FRAME_BUFFER_SIZE * sizeof(uint8_t));
 	memset(COLOR_BUFFER, 0, FRAME_BUFFER_SIZE * sizeof(uint8_t));
-
-	parallel_rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER, 32);
+	
+	int NUM_PROCESSES;
+	if (argc == 1) {
+		NUM_PROCESSES = 1;
+	} else {
+		NUM_PROCESSES = atoi(argv[1]);
+	}
+	parallel_rasterize(projected_faces, Z_BUFFER, COLOR_BUFFER, NUM_PROCESSES);
 
 	// Make PGM file
 	printf("\nMaking PGM file\n");

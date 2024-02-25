@@ -130,8 +130,7 @@ int compareVertices(const Vertex_i v1, const Vertex_i v2) {
  * @note every vertex is hashed to a unique value.
 */
 uint32_t hashVertex(const Vertex_i v) {
-    // return (uint32_t)(v.x << 16 | v.y << 8 | v.z);
-    return (uint32_t)(v.x << 8 | v.y);
+    return (uint32_t)(v.x << 16 | v.y << 8 | v.z);
 }
 
 
@@ -141,6 +140,85 @@ uint32_t hashVertex(const Vertex_i v) {
  * @return The vertices in the face.
 */
 ArrayList* getVerticesInFace(Face_i f) {
+//     ArrayList* vertices = array_list_new();
+//     ArrayList* line1 = getLineVertices(f.v1, f.v2);
+//     ArrayList* line2 = getLineVertices(f.v1, f.v3);
+
+//     struct buffer {
+//         Vertex_i* v;
+//         int valid;
+//     };
+
+//     struct buffer* buffer = (struct buffer*) malloc(MAX_POLYGON_BUFFER * sizeof(struct buffer));
+//     int num_unrolls = 8;
+//     int remainder = MAX_POLYGON_BUFFER % num_unrolls;
+//     for (int i = 0; i < MAX_POLYGON_BUFFER; i+= num_unrolls) {
+//         buffer[i + 0].v = NULL;
+//         buffer[i + 1].v = NULL;
+//         buffer[i + 2].v = NULL;
+//         buffer[i + 3].v = NULL;
+//         buffer[i + 4].v = NULL;
+//         buffer[i + 5].v = NULL;
+//         buffer[i + 6].v = NULL;
+//         buffer[i + 7].v = NULL;
+//         buffer[i + 0].valid = 0;
+//         buffer[i + 1].valid = 0;
+//         buffer[i + 2].valid = 0;
+//         buffer[i + 3].valid = 0;
+//         buffer[i + 4].valid = 0;
+//         buffer[i + 5].valid = 0;
+//         buffer[i + 6].valid = 0;
+//         buffer[i + 7].valid = 0;
+//     }
+//     for (int i = MAX_POLYGON_BUFFER - remainder; i < MAX_POLYGON_BUFFER; i++) {
+//         buffer[i].v = NULL;
+//         buffer[i].valid = 0;
+//     }
+    
+
+//     for (unsigned int i = 0; i < line1->index; i++) {
+//         for (unsigned int j = 0; j < line2->index; j++) {
+//             Vertex_i* v1 = (Vertex_i*) array_list_get(line1, i);
+//             Vertex_i* v2 = (Vertex_i*) array_list_get(line2, j);
+//             ArrayList* line3 = getLineVertices(*v1, *v2);
+//             for (unsigned int k = 0; k < line3->index; k++) {
+//                 Vertex_i* v = (Vertex_i*) array_list_get(line3, k);
+                
+//                 Vertex_i* v_cpy = (Vertex_i*) malloc(sizeof(Vertex_i));
+//                 v_cpy->x = v->x;
+//                 v_cpy->y = v->y;
+//                 v_cpy->z = v->z;
+
+//                 uint32_t hash = hashVertex(*v);
+//                 buffer[hash].v = v_cpy;
+//                 buffer[hash].valid = 1;
+                
+//             }
+//             array_list_free(line3, free_vertex);
+//         }
+//     }
+//     array_list_free(line1, free_vertex);
+//     array_list_free(line2, free_vertex);
+
+
+//     for (int i=0; i<MAX_POLYGON_BUFFER; i+=num_unrolls) {
+//         if (buffer[i + 0].valid) { array_list_append(vertices, buffer[i + 0].v); }
+//         if (buffer[i + 1].valid) { array_list_append(vertices, buffer[i + 1].v); }
+//         if (buffer[i + 2].valid) { array_list_append(vertices, buffer[i + 2].v); }
+//         if (buffer[i + 3].valid) { array_list_append(vertices, buffer[i + 3].v); }
+//         if (buffer[i + 4].valid) { array_list_append(vertices, buffer[i + 4].v); }
+//         if (buffer[i + 5].valid) { array_list_append(vertices, buffer[i + 5].v); }
+//         if (buffer[i + 6].valid) { array_list_append(vertices, buffer[i + 6].v); }
+//         if (buffer[i + 7].valid) { array_list_append(vertices, buffer[i + 7].v); }
+//     }
+//     for (int i = MAX_POLYGON_BUFFER - remainder; i < MAX_POLYGON_BUFFER; i++) {
+//         if (buffer[i].valid) { array_list_append(vertices, buffer[i].v); }
+//     }
+
+
+    // free(buffer);
+    // return vertices;
+
     ArrayList* vertices = array_list_new();
     ArrayList* line1 = getLineVertices(f.v1, f.v2);
     ArrayList* line2 = getLineVertices(f.v1, f.v3);
@@ -197,11 +275,14 @@ void rasterize(ArrayList* faces, uint8_t* Z_BUFFER, uint8_t* COLOR_BUFFER) {
         for (unsigned int j=0; j<blocks->index; j++) {
             Vertex_i* v = (Vertex_i*) array_list_get(blocks, j);
             pixel_location = v->y * DISPLAY_WIDTH + v->x;
-            if (v->z <= Z_BUFFER[pixel_location]) {
+            if (v->z < Z_BUFFER[pixel_location]) {
                 Z_BUFFER[pixel_location] = v->z;
                 COLOR_BUFFER[pixel_location] = f->color.greyscale;
+            } else if (v->z == Z_BUFFER[pixel_location]) {
+                COLOR_BUFFER[pixel_location] = (COLOR_BUFFER[pixel_location] + f->color.greyscale) / 2;
             }
         }
+        // printf("Rasterized face %d of %d\n", i, faces->index);
         array_list_free(blocks, free_vertex);
     }
     return;
@@ -279,36 +360,53 @@ void parallel_rasterize(ArrayList* faces, uint8_t* Z_BUFFER, uint8_t* COLOR_BUFF
             end += faces_per_process;
         }
     }
-
     
     // fork the processes and have change the Z_BUFFER and COLOR_BUFFER in the structs
     for (int i = 0; i < num_processes; i++) {
         if ((pids[i] = fork()) == 0) {
             rasterize(data[i].faces, data[i].Z_BUFFER, data[i].COLOR_BUFFER);
-            write(fd_c[i][1], data[i].COLOR_BUFFER, FRAME_BUFFER_SIZE * sizeof(uint8_t));
-            write(fd_z[i][1], data[i].Z_BUFFER, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+            int w = write(fd_c[i][1], data[i].COLOR_BUFFER, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+            if (w == -1) {
+                perror("write");
+                exit(1);
+            }
+            w = write(fd_z[i][1], data[i].Z_BUFFER, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+            if (w == -1) {
+                perror("write");
+                exit(1);
+            }
             exit(0);
+            
         }
     }
-
 
     // wait for the processes to finish
     for (int i = 0; i < num_processes; i++) {
         waitpid(pids[i], NULL, 0);
     }
 
-
     // combine the Z buffers
     for (int i = 0; i < num_processes; i++) {
         uint8_t* Z_BUFFER_i = (uint8_t*) malloc(FRAME_BUFFER_SIZE * sizeof(uint8_t));
-        read(fd_z[i][0], Z_BUFFER_i, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+        int r = read(fd_z[i][0], Z_BUFFER_i, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+        if (r == -1) {
+            perror("read");
+            exit(1);
+        }
         uint8_t* COLOR_BUFFER_i = (uint8_t*) malloc(FRAME_BUFFER_SIZE * sizeof(uint8_t));
-        read(fd_c[i][0], COLOR_BUFFER_i, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+        r = read(fd_c[i][0], COLOR_BUFFER_i, FRAME_BUFFER_SIZE * sizeof(uint8_t));
+        if (r == -1) {
+            perror("read");
+            exit(1);
+        }
         for (int j = 0; j < FRAME_BUFFER_SIZE; j++) {
             if (Z_BUFFER_i[j] < Z_BUFFER[j]) {
                 Z_BUFFER[j] = Z_BUFFER_i[j];
                 COLOR_BUFFER[j] = COLOR_BUFFER_i[j];
+            } else if (Z_BUFFER_i[j] == Z_BUFFER[j]) {
+                COLOR_BUFFER[j] = (COLOR_BUFFER[j] + COLOR_BUFFER_i[j]) / 2;
             }
+
         }
         free(Z_BUFFER_i);
         free(COLOR_BUFFER_i);

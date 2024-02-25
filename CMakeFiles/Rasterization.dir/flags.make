@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/danny/Documents/school/cpe400/gpu_simulator/ArrayList -I/home/danny/Documents/school/cpe400/gpu_simulator/Primitives -I/home/danny/Documents/school/cpe400/gpu_simulator/OffFile -I/home/danny/Documents/school/cpe400/gpu_simulator/Transformation -I/home/danny/Documents/school/cpe400/gpu_simulator/Lighting -I/home/danny/Documents/school/cpe400/gpu_simulator/Projection -I/home/danny/Documents/school/cpe400/gpu_simulator/Rasterization -I/home/danny/Documents/school/cpe400/gpu_simulator/PGMFile
+C_INCLUDES = -I/home/danny/Documents/school/cpe400/gpu_simulator
 
-C_FLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g
+C_FLAGS = -std=gnu99 -Wall -Wextra -Werror -pedantic -O3 -g
 
