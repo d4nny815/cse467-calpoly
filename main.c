@@ -7,6 +7,14 @@
 #include "Rasterization/Rasterization.h"
 #include "PGMFile/PGMFile.h"
 
+#include <stdlib.h>
+
+float generate_random_float() {
+	float range = 1.6f - 0.8f;
+	float num = (float)rand() / RAND_MAX;
+	return (num * range) + 0.8f;
+}
+
 int main(int argc, char** argv) {
 	// reading OFF file
 	// * This stage would be done by the CPU
@@ -27,7 +35,7 @@ int main(int argc, char** argv) {
 	}
 	free_off_file(off_file);
 
-	// * From here on, the stages would be done by the GPU
+	// * From here on, the stages would be done by the GPU	
 	// Transformation
 	printf("\nTransformation stage\n");
 	float TRANSFORM_MATRIX[] = {-1, 0, 0, 0, 
@@ -44,7 +52,7 @@ int main(int argc, char** argv) {
 
 	// Lighting
 	printf("\nLighting Stage\n");
-	Vector LIGHT_VEC = {1, 1, 1};
+	Vector LIGHT_VEC = {.6, .707, .9};
 	for (unsigned int i=0; i<faces->index; i++) {
 		Face* face = (Face*) array_list_get(faces, i);
 		face->color = calc_color_intensity(face->color, face->normal, LIGHT_VEC);
@@ -88,8 +96,8 @@ int main(int argc, char** argv) {
 	free(Z_BUFFER);
 	free(COLOR_BUFFER);
 
-	array_list_free(faces, free_face);
 	array_list_free(projected_faces, free_face);
+	array_list_free(faces, free_face);
 
 	return 0;
 }

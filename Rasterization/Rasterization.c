@@ -275,14 +275,12 @@ void rasterize(ArrayList* faces, uint8_t* Z_BUFFER, uint8_t* COLOR_BUFFER) {
         for (unsigned int j=0; j<blocks->index; j++) {
             Vertex_i* v = (Vertex_i*) array_list_get(blocks, j);
             pixel_location = v->y * DISPLAY_WIDTH + v->x;
-            if (v->z < Z_BUFFER[pixel_location]) {
+            if (v->z <= Z_BUFFER[pixel_location]) {
                 Z_BUFFER[pixel_location] = v->z;
                 COLOR_BUFFER[pixel_location] = f->color.greyscale;
-            } else if (v->z == Z_BUFFER[pixel_location]) {
-                COLOR_BUFFER[pixel_location] = (COLOR_BUFFER[pixel_location] + f->color.greyscale) / 2;
             }
         }
-        // printf("Rasterized face %d of %d\n", i, faces->index);
+        printf("Rasterized face %d of %d\n", i, faces->index);
         array_list_free(blocks, free_vertex);
     }
     return;
@@ -403,8 +401,6 @@ void parallel_rasterize(ArrayList* faces, uint8_t* Z_BUFFER, uint8_t* COLOR_BUFF
             if (Z_BUFFER_i[j] < Z_BUFFER[j]) {
                 Z_BUFFER[j] = Z_BUFFER_i[j];
                 COLOR_BUFFER[j] = COLOR_BUFFER_i[j];
-            } else if (Z_BUFFER_i[j] == Z_BUFFER[j]) {
-                COLOR_BUFFER[j] = (COLOR_BUFFER[j] + COLOR_BUFFER_i[j]) / 2;
             }
 
         }
