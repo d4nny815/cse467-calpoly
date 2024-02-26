@@ -1,2 +1,0 @@
-/usr/bin/ar qc libPGMFile.a CMakeFiles/PGMFile.dir/PGMFile/PGMFile.c.o
-/usr/bin/ranlib libPGMFile.a

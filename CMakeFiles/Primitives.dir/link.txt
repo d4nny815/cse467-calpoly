@@ -1,2 +1,0 @@
-/usr/bin/ar qc libPrimitives.a CMakeFiles/Primitives.dir/Primitives/Primitives.c.o
-/usr/bin/ranlib libPrimitives.a

@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/GPUSim.dir/main.c.o -o GPUSim  libArrayList.a libOffFile.a libPrimitives.a libTransformation.a libLighting.a libProjection.a libRasterization.a libPGMFile.a -lm 

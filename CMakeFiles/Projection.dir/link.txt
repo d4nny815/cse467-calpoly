@@ -1,2 +1,0 @@
-/usr/bin/ar qc libProjection.a CMakeFiles/Projection.dir/Projection/Projection.c.o
-/usr/bin/ranlib libProjection.a

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libLighting.a CMakeFiles/Lighting.dir/Lighting/Lighting.c.o
-/usr/bin/ranlib libLighting.a

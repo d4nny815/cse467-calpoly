@@ -1,3 +1,5 @@
+# THIS IS THE OLD MAKEFILE, IT IS NOT USED ANYMORE
+# MOVED TO CMAKE
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -O3 -g
 LDFLAGS = -lm

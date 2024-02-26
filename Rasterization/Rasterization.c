@@ -280,7 +280,7 @@ void rasterize(ArrayList* faces, uint8_t* Z_BUFFER, uint8_t* COLOR_BUFFER) {
                 COLOR_BUFFER[pixel_location] = f->color.greyscale;
             }
         }
-        printf("Rasterized face %d of %d\n", i, faces->index);
+        // printf("Rasterized face %d of %d\n", i, faces->index);
         array_list_free(blocks, free_vertex);
     }
     return;

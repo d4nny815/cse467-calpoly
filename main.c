@@ -9,11 +9,11 @@
 
 #include <stdlib.h>
 
-float generate_random_float() {
-	float range = 1.6f - 0.8f;
-	float num = (float)rand() / RAND_MAX;
-	return (num * range) + 0.8f;
-}
+// float generate_random_float() {
+// 	float range = 1.6f - 0.8f;
+// 	float num = (float)rand() / RAND_MAX;
+// 	return (num * range) + 0.8f;
+// }
 
 int main(int argc, char** argv) {
 	// reading OFF file
