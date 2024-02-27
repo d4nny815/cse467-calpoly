@@ -53,9 +53,10 @@ int main(int argc, char** argv) {
 	// Lighting
 	printf("\nLighting Stage\n");
 	Vector LIGHT_VEC = {.6, .707, .9};
+	Vector LIGHT_VEC_NORMALIZED = vec_normalize(LIGHT_VEC);
 	for (unsigned int i=0; i<faces->index; i++) {
 		Face* face = (Face*) array_list_get(faces, i);
-		face->color = calc_color_intensity(face->color, face->normal, LIGHT_VEC);
+		face->color = calc_color_intensity(face->color, face->normal, LIGHT_VEC_NORMALIZED);
 	}
 	
 

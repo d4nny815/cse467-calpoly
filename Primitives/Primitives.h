@@ -59,6 +59,7 @@ float vec_dot_product(Vector A, Vector B);
 Vector vec_scalar(Vector A, float scalar);
 float q_rsqrt(float number);
 float vec_magnitude(Vector A);
+Vector vec_normalize(Vector A);
 
 void print_vertex(Vertex v);
 void print_vertex_i(Vertex_i v);

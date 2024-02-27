@@ -81,6 +81,19 @@ float vec_magnitude(Vector A) {
 
 
 /**
+ * @brief Normalizes a vector.
+ * @param A The vector to normalize.
+ * @return The normalized vector.
+ * @note https://www.symbolab.com/solver/vector-normalize-calculator
+*/
+Vector vec_normalize(Vector A) {
+    float dot = vec_dot_product(A, A);
+    float inv_sqrt = q_rsqrt(dot);
+    return vec_scalar(A, inv_sqrt);
+}
+
+
+/**
  * @brief Calculates the inverse square root of a number.
  * @param number The number to calculate the inverse square root of.
  * @return The inverse square root of the number.
